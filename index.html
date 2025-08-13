@@ -3,41 +3,42 @@
 <head>
     <title>School Visitor Check-in</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-        }
-        iframe {
-            border: 0;
-            width: 100%;
-            height: 100%;
-        }
+        /* CSS to make the form visually appealing */
+        body { font-family: sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .container { background-color: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 100%; max-width: 500px; text-align: center; }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; margin-bottom: 8px; color: #555; font-weight: 500; }
+        input[type="text"], select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1em; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background-color: #007bff; color: white; border: none; border-radius: 8px; font-size: 1.1em; font-weight: 600; cursor: pointer; }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Visitor Check-in</h1>
+        <form id="kioskForm" action="https://docs.google.com/forms/d/e/1FAIpQLScOMhgPAQViAJLQ5_246ZxNYdClHFqmN30ZT8Dogu6LjR0M4Q/viewform?usp=sharing&ouid=103732194481540391542" target="hidden_iframe" onsubmit="submitted=true;">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="entry.123456789" required>
+            </div>
+            <div class="form-group">
+                <label for="visitor-type">Visitor Type</label>
+                <select id="visitor-type" name="entry.987654321" required>
+                    <option value="" disabled selected>Select a type</option>
+                    <option value="Contractor">Contractor</option>
+                    <option value="School Tour">School Tour</option>
+                    <option value="Visitor">Visitor</option>
+                    <option value="Faculty">Faculty</option>
+                    <option value="Parent">Parent</option>
+                </select>
+            </div>
+            <button type="submit">Check In</button>
+        </form>
+    </div>
 
-<iframe id="kioskFrame" src="https://docs.google.com/forms/d/e/1FAIpQLScOMhgPAQViAJLQ5_246ZxNYdClHFqmN30ZT8Dogu6LjR0M4Q/viewform?usp=sharing&ouid=103732194481540391542" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){setTimeout(function(){location.reload();}, 10000);}"></iframe>
 
-<script>
-    const kioskFrame = document.getElementById('kioskFrame');
-    const formUrl = kioskFrame.src;
-
-    kioskFrame.onload = function() {
-        const currentUrl = kioskFrame.contentWindow.location.href;
-
-        // Check if the current URL is different from the original form URL
-        // A change indicates the form was submitted and a confirmation page is shown
-        if (currentUrl !== formUrl) {
-            // Wait 10 seconds, then reload the main page
-            setTimeout(function() {
-                location.reload();
-            }, 10000); // 10000 milliseconds = 10 seconds
-        }
-    };
-</script>
-
+    <script>
+        var submitted = false;
+    </script>
 </body>
 </html>
-
