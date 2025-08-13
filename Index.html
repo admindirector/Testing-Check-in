@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>School Visitor Check-in</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            border: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<iframe id="kioskFrame" src="https://docs.google.com/forms/d/e/1FAIpQLScOMhgPAQViAJLQ5_246ZxNYdClHFqmN30ZT8Dogu6LjR0M4Q/viewform?usp=sharing&ouid=103732194481540391542" frameborder="0" marginheight="0" marginwidth="0" onload="setupAutoReload()">Loading…</iframe>
+
+<script>
+    function setupAutoReload() {
+        const iframe = document.getElementById('kioskFrame');
+        if (iframe && iframe.contentWindow.document.forms[0]) {
+            iframe.contentWindow.document.forms[0].addEventListener('submit', function() {
+                // Wait 10 seconds after submission, then reload the page
+                setTimeout(function() {
+                    location.reload();
+                }, 10000); // 10000 milliseconds = 10 seconds
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
